@@ -1,0 +1,29 @@
+{
+  "name": "bwcypress",
+  "version": "1.0.0",
+  "description": "REST API and UI Testing with Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akotime/BWCypress.git"
+  },
+  "keywords": [
+    "REST",
+    "API",
+    "Cypress",
+    "UI",
+    "POM"
+  ],
+  "author": "Adam K",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akotime/BWCypress/issues"
+  },
+  "homepage": "https://github.com/akotime/BWCypress#readme",
+  "dependencies": {
+    "cypress": "^7.7.0"
+  }
+}
