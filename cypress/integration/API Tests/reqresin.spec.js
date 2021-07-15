@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('REST API Test create user in reqres.in with Cypress', () => {
-    beforeEach('Go to the reqres.in website', () => {
+    before('Go to the reqres.in website', () => {
         cy.fixture('reqres.json').then(reqres => {
             const baseURL = reqres.baseUrl
             cy.visit(baseURL)
@@ -21,7 +21,7 @@ describe('REST API Test create user in reqres.in with Cypress', () => {
             }
         }).as('createUser').then((response) => {
             cy.log(response.body)
-            //cy.writeFile('cypress/fixtures/user.json', response.body)
+            cy.writeFile('cypress/fixtures/user.json', response.body)
         })
         
         cy.get('@createUser')
@@ -41,6 +41,40 @@ describe('REST API Test create user in reqres.in with Cypress', () => {
             })
     })
 
+    it('Validate creating existing user - POST', () => {
+        cy.fixture('user.json').then(user => {
+            cy.request({
+                method: 'POST',
+                url: '/api/users',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: user
+            }).as('createUser').then((response) => {
+                cy.log(response.body)
+            })
+        })
+        
+        cy.get('@createUser')
+            .its('headers')
+            .its('content-type')
+            .should('include', 'application/json; charset=utf-8')
+
+        cy.get('@createUser') 
+            .its('status')
+            .should('equal', 201)
+
+        cy.fixture('user.json').then(user => {
+            cy.get('@createUser')
+                .its('body')
+                .should('include', {
+                    name: user.name,
+                    job: user.job,
+                    id: user.id
+                })
+        })
+    })
+
     it('Validate creating empty user - POST', () => {
         cy.request({
             method: 'POST',
@@ -58,10 +92,7 @@ describe('REST API Test create user in reqres.in with Cypress', () => {
 
         cy.get('@createUser')
             .its('body')
-            .should('not.include', {
-                name: 'tester',
-                 job: 'qa'
-            })
+            .should('not.have.property', 'name')
     })
 
     it('Validate negative example of creating user for non existing endpoint - POST', () => {
@@ -91,7 +122,6 @@ describe('REST API Test create user in reqres.in with Cypress', () => {
             }
         }).as('createUser').then((response) => {
             cy.log(response.body)
-            //cy.writeFile('cypress/fixtures/userUpdated.json', response.body)
         })
 
         cy.get('@createUser')
@@ -115,7 +145,45 @@ describe('REST API Test create user in reqres.in with Cypress', () => {
             .should('have.keys', 'name', 'job', 'updatedAt')
     })
 
-    it('Validate Update User - PATCH', () => {
+    it('Validate Update User to the same user created in first test - PUT', () => {
+        cy.fixture('user').then(user => {
+            cy.request({
+                method: 'PUT',
+                url: '/api/users/2',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: user
+            }).as('createUser').then((response) => {
+                cy.log(response.body)
+            })
+        })
+
+        cy.get('@createUser')
+            .its('headers')
+            .its('content-type')
+            .should('include', 'application/json; charset=utf-8')
+
+        cy.get('@createUser') 
+            .its('status')
+            .should('equal', 200)
+
+        cy.fixture('user').then(user => {    
+            cy.get('@createUser')
+                .its('body')
+                .should('include', {
+                    name: user.name,
+                    job: user.job,
+                    id: user.id
+            })
+        })        
+
+        cy.get('@createUser')
+            .its('body')
+            .should('have.keys', 'id','name', 'job', 'updatedAt', 'createdAt')
+    })
+
+   it('Validate Update User - PATCH', () => {
         cy.request({
             method: 'PATCH',
             url: '/api/users/2',
@@ -128,7 +196,6 @@ describe('REST API Test create user in reqres.in with Cypress', () => {
             }
         }).as('createUser').then((response) => {
             cy.log(response.body)
-            //cy.writeFile('cypress/fixtures/userUpdatedPatch.json', response.body)
         })
 
         cy.get('@createUser')
