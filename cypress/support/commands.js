@@ -23,3 +23,23 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import LoginPage from './PageObjects/LoginPage'
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+})
+
+Cypress.Commands.add('login', (username, password) => {
+    // Creating Object for LoginPage
+    const loginPage = new LoginPage()
+
+    // Type username and password to input box
+    loginPage.getEmail().type(username)
+    loginPage.getPassword().type(password)
+
+    // Click Sign In Button
+    loginPage.getSignInButton().click()
+})
