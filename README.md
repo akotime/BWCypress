@@ -8,13 +8,13 @@ and tests for validating 'Sign In' and 'Sign Up' UI of the website "http://a.tes
 1) Download the repo BWCypress:
     git clone https://github.com/akotime/BWCypress.git
 
-2) Move to BWCypress folder
+2) Move to BWCypress folder: 
     cd BWCypress
 
-3) Install Cypress
+3) Install Cypress: 
     npm install cypress
 
-4) Open Cypress Test Runner
+4) Open Cypress Test Runner: 
     npx cypress open
 
 5) Choose test in Cypress Test Runner and Run it
