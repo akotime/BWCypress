@@ -1,0 +1,14 @@
+{
+    "baseURL": "http://a.testaddressbook.com/",
+    "signUpURL": "http://a.testaddressbook.com/sign_up",
+    "signInURL": "http://a.testaddressbook.com/sign_in",
+    "username": "testak@test.com",
+    "password": "Password_12345",
+    "emptyUsername": "",
+    "emptyPassword": "",
+    "domainName": "test.com",
+    "newAddresse": "addresses/new",
+    "addressText": "Addresses",
+    "endpointUsers": "users",
+    "signUpPageTitle": "Sign up"
+}
