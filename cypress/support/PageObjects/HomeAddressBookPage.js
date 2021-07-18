@@ -16,6 +16,10 @@ class HomeAddressBookPage {
     getAddressesLink() {
         return cy.get('[data-test="addresses"]')
     }
+
+    getSignOutLink() {
+        return cy.contains('Sign out')
+    }
 }
 
 export default  HomeAddressBookPage

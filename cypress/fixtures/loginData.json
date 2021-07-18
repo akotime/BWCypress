@@ -1,0 +1,13 @@
+{
+    "signInURL": "http://a.testaddressbook.com/sign_in",
+    "username": "testak@test.com",
+    "password": "Password_12345",
+    "wrongUsername": "testak@textttt.com",
+    "wrongPassword": "Password",
+    "welcomeText": "Welcome to Address Book",
+    "describeText": "A simple web app for showing off your testing",
+    "partUrlAddresses": "addresses",
+    "addressText": "Addresses",
+    "partUrlNewAddress": "new",
+    "loginErrorMessage": "Bad email or password."
+}

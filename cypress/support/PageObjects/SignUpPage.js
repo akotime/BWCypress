@@ -2,11 +2,11 @@
 
 class SignUpPage {
     getEmail() {
-        return cy.get('id="user_email"')
+        return cy.get('#user_email')
     }
 
     getPassword() {
-        return cy.get('id="user_password"')
+        return cy.get('#user_password')
     }
 
     getSignUpButton() {
@@ -15,6 +15,10 @@ class SignUpPage {
 
     getSignInLink() {
         return cy.get('#new_user a[data-test="sign-in"]')
+    }
+
+    getSignUpTitle() {
+        return cy.get('h2')
     }
 }
 

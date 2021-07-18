@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import LoginPage from './PageObjects/LoginPage'
+import SignUpPage from './PageObjects/SignUpPage'
 
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
@@ -42,4 +43,26 @@ Cypress.Commands.add('login', (username, password) => {
 
     // Click Sign In Button
     loginPage.getSignInButton().click()
+})
+
+Cypress.Commands.add('signUpUser', (username, password) => {
+    // Creating Object for SignUpPage
+    const signUp = new SignUpPage()
+
+    // Type username and password to input box
+    signUp.getEmail().invoke('val', username)
+    signUp.getPassword().invoke('val', password)
+    
+    // Click Sign Up Button
+    signUp.getSignUpButton().click()
+})
+
+Cypress.Commands.add('genSimpleRandomEmail', (domainString) => {
+    let text = ''
+    let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+
+    for(let i=0; i < 10; i++)
+        text += alphabet.charAt(Math.floor(Math.random() * alphabet.length))
+    
+    return text +'@' + domainString
 })
